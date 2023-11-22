@@ -1,5 +1,3 @@
-# consumer.py
-
 from json import loads
 from flask import Flask
 from kafka import KafkaConsumer
@@ -15,7 +13,7 @@ try:
 
 except pymongo.errors.ServerSelectionTimeoutError as err:
     print(" * Failed to connect DB", err)
-
+g
 
 collection = db.consumer
 
