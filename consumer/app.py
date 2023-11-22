@@ -13,7 +13,7 @@ try:
 
 except pymongo.errors.ServerSelectionTimeoutError as err:
     print(" * Failed to connect DB", err)
-g
+    
 
 collection = db.consumer
 
