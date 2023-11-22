@@ -40,7 +40,9 @@ kafka-console-consumer.sh --topic shipping_data --bootstrap-server localhost:909
 
 # --------------------------------------------------------- #
 docker-compose build
+
 docker-compose up -d
+
 docker-compose up --build
 # --------------------------------------------------------- #
 
