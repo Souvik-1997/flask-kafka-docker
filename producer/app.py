@@ -45,6 +45,7 @@ def create():
     except Exception as e:
         data = {"error": e} 
     
+    
     response_data = {
         "message": "Shipping data has been created successfully.",
         "success": True,

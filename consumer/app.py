@@ -1,5 +1,7 @@
-from json import dumps, loads
-from flask import Flask, request
+# consumer.py
+
+from json import loads
+from flask import Flask
 from kafka import KafkaConsumer
 import pymongo
 
@@ -15,27 +17,24 @@ except pymongo.errors.ServerSelectionTimeoutError as err:
     print(" * Failed to connect DB", err)
 
 
-
-@app.route("/", methods=["Get"])
-def create():
-    collection = db.consumer
-
-    topic_name = "shipping_data"
-
-    consumer = KafkaConsumer(
-        topic_name,
-        bootstrap_servers='kafka:9093',
-        auto_offset_reset='earliest',
-        value_deserializer=lambda x: loads(x.decode('utf-8'))
-    )
-
-    for message in consumer:
-        ship_data = message.value
-        collection.insert_one(ship_data)
+collection = db.consumer
 
 
+topic_name = "shipping_data"
 
 
+consumer = KafkaConsumer(
+    topic_name,
+    bootstrap_servers='kafka:9093',
+    auto_offset_reset='earliest',
+    value_deserializer=lambda x: loads(x.decode('utf-8'))
+)
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+
+for message in consumer:
+    ship_data = message.value
+    collection.insert_one(ship_data)
+
+
+consumer.close()
+
