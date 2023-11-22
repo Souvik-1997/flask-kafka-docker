@@ -14,8 +14,11 @@ sudo systemctl restart docker
 
 
 sudo usermod -aG docker $USER
+
 ls -l /var/run/docker.sock
+
 sudo systemctl restart docker
+
 export DOCKER_HOST=unix:///var/run/docker.sock
 
 
@@ -38,6 +41,7 @@ kafka-console-consumer.sh --topic shipping_data --bootstrap-server localhost:909
 # --------------------------------------------------------- #
 docker-compose build
 docker-compose up -d
+docker-compose up --build
 # --------------------------------------------------------- #
 
 # deploy_kafka_docker
